@@ -5,8 +5,28 @@
  */
 const getStore = ({ getStore, getActions, setStore }) => {
     return {
-        store: {},
-        actions: {}
+        store: {
+            people: [],
+            urlBase: 'https://www.swapi.tech/api/',
+        },
+        actions: {
+            getEntitys: ()=>{
+                const { urlBase }= getStore();
+                const urlResourcePeople= `${urlBase}people`;
+
+                fetch(urlResourcePeople)
+                .then(response=>{
+                    console.log(response)
+                    return response.json()
+                })
+                .then(data=>{
+                    console.log(data)
+                })
+                .catch(error=>
+                    console.log(error))
+            },  
+            
+        }
     }
 }
 

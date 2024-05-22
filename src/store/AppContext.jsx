@@ -29,7 +29,7 @@ const injectContext = PassedComponent => {
             // al momento de cargar la pagina web por primera vez
 
             // state.actions.getUsers()
-
+           state.actions.getEntitys()
         }, [])
 
         return (
