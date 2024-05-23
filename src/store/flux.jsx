@@ -7,25 +7,31 @@ const getStore = ({ getStore, getActions, setStore }) => {
     return {
         store: {
             people: [],
-            urlBase: 'https://www.swapi.tech/api/',
+            urlEntitys: [
+                /* URLS DE LAS ENTIDIDADES PARA MOSTRAR Y CONSULTAR DESDE LA VISTA PRINCIPAL.
+                   SON UTILIZADAS EN LA FUNCIÓN GETENTITYS*/
+                "https://www.swapi.tech/api/people",
+                "https://www.swapi.tech/api/vehicles",
+                "https://www.swapi.tech/api/planets"
+            ],
         },
         actions: {
-            getEntitys: ()=>{
-                const { urlBase }= getStore();
-                const urlResourcePeople= `${urlBase}people`;
+            getEntitys: () => {
+                /* EJECUTA 3 FETCH POR MEDIO DEL MAP PARA  AHORRAR LÍENAS DE CÓDIGO */
+                const { urlEntitys } = getStore();
+                const peticion = Promise.all(urlEntitys.map(
+                    urlEntety =>
+                        fetch(urlEntety)
+                            .then(response => {
+                                console.log('STATUS', response.status)
+                                return response.json()
+                            })
+                            .then(data => {
+                                console.log('ENTIDADES', data.results)
+                            })
+                ))
+            },
 
-                fetch(urlResourcePeople)
-                .then(response=>{
-                    console.log(response)
-                    return response.json()
-                })
-                .then(data=>{
-                    console.log(data)
-                })
-                .catch(error=>
-                    console.log(error))
-            },  
-            
         }
     }
 }
