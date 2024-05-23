@@ -1,8 +1,13 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import CardHome from '../components/CardHome' 
+import { Context } from '../store/AppContext'
 
 const Home = () => {
+    const { store, actions }= useContext(Context)
     return (
-        <h1>REACT APP WITH CONTEXT API</h1>
+        <>
+            <CardHome /> 
+        </>
     )
 }
 
