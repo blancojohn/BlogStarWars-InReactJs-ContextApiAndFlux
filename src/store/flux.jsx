@@ -1,3 +1,4 @@
+
 /**
  *  getStore: () => {}, //funcion que devuelve el objeto store con cada uno de los atributos alli definidos, 
  *  getActions: () => {}, //funcion que devuelve el objeto actions con cada una de las funciones alli definidas,
@@ -9,35 +10,49 @@ const getStore = ({ getStore, getActions, setStore }) => {
             characters: [],
             vehicles: [],
             planets: [],
+
+            people: [],
+            vehicle: [],
+            planet: [],
+
+            urlBase: "https://www.swapi.tech/api/"
         },
         actions: {
             getEntitys: () => {
-                fetch("https://www.swapi.tech/api/people")
+                const { urlBase }= getStore()
+                fetch(`${urlBase}people`)
                     .then(res => res.json())
                     .then(data => {
-                        console.log(data.results)
                         setStore({ characters: data.results })
                     })
                     .catch(err => console.error(err))
-                fetch("https://www.swapi.tech/api/vehicles")
+                fetch(`${urlBase}vehicles`)
                     .then(res => res.json())
                     .then(data => {
-                        console.log(data.results)
                         setStore({ vehicles: data.results })
                     })
                     .catch(err => console.error(err))
-                fetch("https://www.swapi.tech/api/planets")
+                fetch(`${urlBase}planets`)
                     .then(res => res.json())
                     .then(data => {
-                        console.log(data.results)
                         setStore({ planets: data.results })
                     })
                     .catch(err => console.error(err))
-            }
+            },
 
+            getPeople: (url) => {
+                return fetch(url)
+                    .then(response => response.json())
+                    .then(data => {
+                        setStore({ people: data.result.properties })
+                    })
+                    .catch(err => console.log(err))
+            },
         }
     }
 }
 
 export default getStore
+
+
 

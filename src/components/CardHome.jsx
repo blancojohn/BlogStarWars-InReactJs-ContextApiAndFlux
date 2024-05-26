@@ -1,5 +1,7 @@
 import React, { useContext } from "react";
 import { Context } from '../store/AppContext'
+import { Link } from "react-router-dom";
+import { FcLikePlaceholder } from "react-icons/fc";
 
 const CardHome = () => {
     const { store, actions } = useContext(Context)
@@ -10,17 +12,17 @@ const CardHome = () => {
                 <div className="row">
                     <h1>Characters</h1>
                     {
-                        store.characters.map((people, index) => {
+                        store.characters.map((people) => {
                             return (
-                                <div className="col-md-2">
-                                    <div key={people.uid} className="card">
+                                <div key={people.uid} className="col-md-3">
+                                    <div className="card">
                                         <img src="..." className="card-img-top" alt="..."></img>
                                         <div className="card-body">
                                             <h6 className="card-title">{people.name}</h6>
                                         </div>
                                         <div className="card-body">
-                                            <a href="#" className="card-link">Card link</a>
-                                            <a href="#" className="card-link">Another link</a>
+                                            <Link to={`/${people.name}`} onClick={()=>{actions.getPeople(people.url)}} type="button" className="btn btn-primary">Learn More</Link>
+                                            <FcLikePlaceholder />
                                         </div>
                                     </div>
                                 </div>
@@ -31,8 +33,8 @@ const CardHome = () => {
                     {
                         store.vehicles.map((vehicle, index) => {
                             return (
-                                <div className="col-md-2">
-                                    <div key={vehicle.uid} className="card">
+                                <div key={vehicle.uid} className="col-md-3">
+                                    <div className="card">
                                         <img src="..." className="card-img-top" alt="..."></img>
                                         <div className="card-body">
                                             <h6 className="card-title">{vehicle.name}</h6>
@@ -50,8 +52,8 @@ const CardHome = () => {
                     {
                         store.planets.map((planet, index) => {
                             return (
-                                <div className="col-md-2">
-                                    <div key={planet.uid} className="card">
+                                <div key={planet.uid} className="col-md-3">
+                                    <div className="card">
                                         <img src="..." className="card-img-top" alt="..."></img>
                                         <div className="card-body">
                                             <h6 className="card-title">{planet.name}</h6>
@@ -65,7 +67,6 @@ const CardHome = () => {
                             )
                         })
                     }
-
                 </div>
             </div>
         </>
@@ -73,4 +74,5 @@ const CardHome = () => {
 }
 
 export default CardHome
+
 
