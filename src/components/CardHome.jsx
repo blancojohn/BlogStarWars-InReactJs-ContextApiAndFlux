@@ -1,10 +1,15 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Context } from '../store/AppContext'
 import { Link } from "react-router-dom";
-import { FcLikePlaceholder } from "react-icons/fc";
+import HeartIcon from "./HeartIcon";
 
 const CardHome = () => {
     const { store, actions } = useContext(Context)
+    /* const func= ()=>{
+        actions.handleLikeUnLike()
+        actions.getFavorite()
+    } */
+
 
     return (
         <>
@@ -12,7 +17,7 @@ const CardHome = () => {
                 <div className="row">
                     <h1>Characters</h1>
                     {
-                        store.characters.map((people) => {
+                        store.characters.map((people, index) => {
                             return (
                                 <div key={people.uid} className="col-md-3">
                                     <div className="card">
@@ -21,8 +26,10 @@ const CardHome = () => {
                                             <h6 className="card-title">{people.name}</h6>
                                         </div>
                                         <div className="card-body">
-                                            <Link to={`/${people.name}`} onClick={()=>{actions.getPeople(people.url)}} type="button" className="btn btn-primary">Learn More</Link>
-                                            <FcLikePlaceholder />
+                                            <Link to={`/details/${people.name}`} onClick={()=>{actions.getPeople(people.url)}} type="button" className="btn btn-primary">Learn More</Link>
+                                            <button onClick={()=>actions.getFavorites(index)} className={`likeBtn ${store.liked ? "liked" : ""}`}>
+                                                <HeartIcon />
+                                            </button>
                                         </div>
                                     </div>
                                 </div>
@@ -74,5 +81,6 @@ const CardHome = () => {
 }
 
 export default CardHome
+
 
 

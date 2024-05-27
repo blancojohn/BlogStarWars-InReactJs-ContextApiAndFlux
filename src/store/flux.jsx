@@ -15,11 +15,14 @@ const getStore = ({ getStore, getActions, setStore }) => {
             vehicle: [],
             planet: [],
 
+            liked: false,
+            favorites: [],
+
             urlBase: "https://www.swapi.tech/api/"
         },
         actions: {
             getEntitys: () => {
-                const { urlBase }= getStore()
+                const { urlBase } = getStore()
                 fetch(`${urlBase}people`)
                     .then(res => res.json())
                     .then(data => {
@@ -48,6 +51,34 @@ const getStore = ({ getStore, getActions, setStore }) => {
                     })
                     .catch(err => console.log(err))
             },
+
+            /*  handleLikeUnLike: () => {
+                 const { favorites }= getStore()
+                 setStore({favorites: })
+             }, */
+
+           /*  getFavorite: (url) => {
+                return fetch(url)
+                    .then(response => response.json())
+                    .then(data => {
+                        setStore({ favorites: data.result.properties })
+                    })
+                    .catch(err => console.log(err))
+
+            } */
+
+            getFavorites: (index) => {
+                const { characters, favorites }= getStore()
+                let favorite= characters[index]
+                setStore({favorites: [...favorites, {
+                    entidad: favorite
+                }]})
+
+                /* setTodos([...todos,
+                    { id: nextId++, inputTodo: inputTodo }
+                    ]) */
+                
+            }
         }
     }
 }
