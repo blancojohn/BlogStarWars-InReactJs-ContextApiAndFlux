@@ -1,43 +1,41 @@
 import React, { useContext } from "react";
 import { Context } from "../store/AppContext";
-
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
     const { store, actions } = useContext(Context)
 
     return (
         <>
-            <nav className="navbar navbar-expand-lg bg-body-tertiary">
-                <div className="container-fluid">
-                    <a className="navbar-brand" href="#">Navbar</a>
-                    <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-                        <span className="navbar-toggler-icon"></span>
-                    </button>
-                    <div className="collapse navbar-collapse" id="navbarNavDropdown">
-                        <ul className="navbar-nav">
-                            <li className="nav-item dropdown">
-                                <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Favorites
-                                </a>
-                                <ul className="dropdown-menu">
-                                    {
-                                        store.favorites.map((entity)=>{
-                                            return(
-                                                <>
-                                                    <li key={entity.entidad.uid}><a className="dropdown-item" href="#">{entity.entidad.name}</a></li>
-                                                    
-                                                </>
-                                            )
-                                        })
-                                    }
-                                </ul>
-                            </li>
+            <div className="container">
+                <nav className="navbar navbar-expand-lg bg-body-tertiary">
+                    <div className="container-fluid">
+                        <a className="navbar-brand" href="#">StarWars</a>
+                    </div>
+                    <div className="dropdown">
+                        <Link to='/' className="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Favorites {store.favorites.length}
+                        </Link>
+                        <ul className="dropdown-menu">
+                            {
+                                store.favorites.map((entity) => {
+                                    return (
+                                        <li key={entity.favorite.uid}>
+                                            <Link to={`/details/${entity.favorite.name}`} onClick={()=>{actions.getPeople(entity.favorite.url)}} className="dropdown-item" href="#">
+                                                {entity.favorite.name}
+                                            </Link>
+                                        </li>
+                                    )
+                                })
+                            }
                         </ul>
                     </div>
-                </div>
-            </nav>
+                </nav>
+            </div>
         </>
     )
 }
 
 export default Navbar
+
+

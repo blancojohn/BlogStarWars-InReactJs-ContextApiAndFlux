@@ -71,13 +71,8 @@ const getStore = ({ getStore, getActions, setStore }) => {
                 const { characters, favorites }= getStore()
                 let favorite= characters[index]
                 setStore({favorites: [...favorites, {
-                    entidad: favorite
-                }]})
-
-                /* setTodos([...todos,
-                    { id: nextId++, inputTodo: inputTodo }
-                    ]) */
-                
+                    favorite
+                }]})                
             }
         }
     }
