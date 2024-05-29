@@ -1,15 +1,11 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { Context } from '../store/AppContext'
 import { Link } from "react-router-dom";
 import HeartIcon from "./HeartIcon";
 
+
 const CardHome = () => {
     const { store, actions } = useContext(Context)
-    /* const func= ()=>{
-        actions.handleLikeUnLike()
-        actions.getFavorite()
-    } */
-
 
     return (
         <>
@@ -26,8 +22,8 @@ const CardHome = () => {
                                             <h6 className="card-title">{people.name}</h6>
                                         </div>
                                         <div className="card-body">
-                                            <Link to={`/details/${people.name}`} onClick={()=>{actions.getPeople(people.url)}} type="button" className="btn btn-primary">Learn More</Link>
-                                            <button onClick={()=>actions.getFavorites(index)} className={`likeBtn ${store.liked ? "liked" : ""}`}>
+                                            <Link to={`/details/${people.uid}`} onClick={()=>actions.selectEntity(index)} type="button" className="btn btn-primary">Learn More</Link>
+                                            <button onClick={()=>actions.addFavorites(index)} className={`likeBtn ${store.liked ? "liked" : ""}`}>
                                                 <HeartIcon />
                                             </button>
                                         </div>

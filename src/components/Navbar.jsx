@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { Context } from "../store/AppContext";
 import { Link } from "react-router-dom";
+import { GiTrashCan } from "react-icons/gi";
 
 const Navbar = () => {
     const { store, actions } = useContext(Context)
@@ -10,20 +11,23 @@ const Navbar = () => {
             <div className="container">
                 <nav className="navbar navbar-expand-lg bg-body-tertiary">
                     <div className="container-fluid">
-                        <a className="navbar-brand" href="#">StarWars</a>
+                        <Link to={'/'}className="navbar-brand" href="#">StarWars</Link>
                     </div>
                     <div className="dropdown">
-                        <Link to='/' className="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <button className="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Favorites {store.favorites.length}
-                        </Link>
+                        </button>
                         <ul className="dropdown-menu">
                             {
-                                store.favorites.map((entity) => {
+                                store.favorites.map((entity, index) => {
                                     return (
-                                        <li key={entity.favorite.uid}>
-                                            <Link to={`/details/${entity.favorite.name}`} onClick={()=>{actions.getPeople(entity.favorite.url)}} className="dropdown-item" href="#">
+                                        <li key={entity.favorite.uid} className="d-flex">
+                                            <Link to={`/details/${entity.favorite.uid}`} onClick={()=>{actions.selectEntity(index)}} className="dropdown-item" href="#">
                                                 {entity.favorite.name}
                                             </Link>
+                                            <button onClick={()=> actions.deleteFavorites(index)}>
+                                                <GiTrashCan />
+                                            </button>
                                         </li>
                                     )
                                 })
@@ -37,5 +41,6 @@ const Navbar = () => {
 }
 
 export default Navbar
+
 
 

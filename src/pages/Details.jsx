@@ -1,14 +1,20 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Context } from "../store/AppContext";
+import { useParams } from "react-router-dom";
 
 
 const CardDetails = () => {
-    const { store } = useContext(Context)
-    const { height, name }= store.people
+    const { store, actions } = useContext(Context)
+    const { name, height, mass, hair_color, skin_color, bitrh_year, gender }= store.detailsPeople 
+    const params= useParams()
+
+    useEffect(() => {
+        actions.getDetailsPeople(params.uid)
+    }, [params.uid])
     
     return (
         <>
-            <div className="card mb-3">
+            <div className="container card mb-3">
                 <div className="row g-0">
                     <div className="col-md-4">
                         <img src="https://picsum.photos/id/129/200/200" className="img-fluid rounded-start" alt="..."></img>
@@ -19,12 +25,12 @@ const CardDetails = () => {
                             <p className="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
                         </div>
                         <ul className="list-group list-group-flush">
-                            <li className="list-group-item">{height}</li>
-                            <li className="list-group-item">A second item</li>
-                            <li className="list-group-item">A third item</li>
-                            <li className="list-group-item">A third item</li>
-                            <li className="list-group-item">A third item</li>
-                            <li className="list-group-item">A third item</li>
+                            <li className="list-group-item">Height: {height}</li>
+                            <li className="list-group-item">Mass: {mass}</li>
+                            <li className="list-group-item">Hair Color: {hair_color}</li>
+                            <li className="list-group-item">Skin color: {skin_color}</li>
+                            <li className="list-group-item">Birth year: {bitrh_year}</li>
+                            <li className="list-group-item">Gender: {gender}</li>
                         </ul>
                     </div>
                 </div>
@@ -38,3 +44,4 @@ export default CardDetails
 
 
 
+ 
