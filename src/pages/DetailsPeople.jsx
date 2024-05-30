@@ -3,15 +3,15 @@ import { Context } from "../store/AppContext";
 import { useParams } from "react-router-dom";
 
 
-const CardDetails = () => {
+const DetailsPeople = () => {
     const { store, actions } = useContext(Context)
-    const { name, height, mass, hair_color, skin_color, bitrh_year, gender }= store.detailsPeople 
-    const params= useParams()
+    const { name, height, mass, hair_color, skin_color, bitrh_year, gender } = store.detailsPeople
+    const params = useParams()
 
     useEffect(() => {
         actions.getDetailsPeople(params.uid)
     }, [params.uid])
-    
+
     return (
         <>
             <div className="container card mb-3">
@@ -39,9 +39,8 @@ const CardDetails = () => {
     )
 }
 
-export default CardDetails
+export default DetailsPeople
 
 
 
 
- 

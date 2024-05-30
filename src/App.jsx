@@ -2,8 +2,9 @@ import React from 'react';
 import injectContext from './store/AppContext';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Home from './pages/Home';
-import Details from './pages/Details'; 
 import Navbar from './components/Navbar';
+import DetailsPeople from './pages/DetailsPeople';
+import DetailsVehicle from './pages/DetailsVehicle';
 
 
 const App = () => {
@@ -14,7 +15,8 @@ const App = () => {
         <Navbar />
         <Routes>
           <Route path='/' element={<Home />} />
-          <Route path='/details/:uid' element={<Details />} /> 
+          <Route path='/:people/:uid' element={<DetailsPeople />} />
+          <Route path='/:vehicle/:uid' element={<DetailsVehicle />} /> 
         </Routes>
       </BrowserRouter>
     </>

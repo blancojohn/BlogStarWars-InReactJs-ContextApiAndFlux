@@ -8,16 +8,13 @@
 }
 
 .likeBtn {
-    border: 2px solid var(--default-color);
+    border:none;
     display: flex;
     align-items: center;
-    gap: 8px;
-    border-radius: 32px;
+    border-radius: none;
     cursor: pointer;
     font-weight: bold;
     height: 30px;
-    padding: 4px 8px;
-    margin-bottom: 5px;
     color: var(--default-color);
     background-color: #fff;
 }
@@ -36,4 +33,4 @@
 
 .likeBtn-icon {
     display: flex;
-}
+} 

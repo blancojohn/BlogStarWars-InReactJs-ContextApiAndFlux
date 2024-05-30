@@ -28,4 +28,4 @@ const HeartIcon = ({className}) => {
     )
 }
 
-export default HeartIcon
+export default HeartIcon 

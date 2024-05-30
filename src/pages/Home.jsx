@@ -1,12 +1,16 @@
 import React, { useContext } from 'react'
-import CardHome from '../components/CardHome' 
 import { Context } from '../store/AppContext'
+import CardPeople from '../components/CardPeople'
+import CardVehicle from '../components/CardVehicle'
+import CardPlanet from '../components/CardPlanet'
 
 const Home = () => {
     const { store, actions }= useContext(Context)
     return (
         <>
-            <CardHome /> 
+            <CardPeople />
+            <CardVehicle />
+            <CardPlanet /> 
         </>
     )
 }
