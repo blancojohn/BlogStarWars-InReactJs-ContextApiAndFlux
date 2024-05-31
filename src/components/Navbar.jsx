@@ -22,7 +22,7 @@ const Navbar = () => {
                                 store.favorites.map((entity, index) => {
                                     return (
                                         <li key={entity.favorite.uid} className="d-flex">
-                                            <Link to={`/details/${entity.favorite.uid}`} /* onClick={()=>{actions.selectEntity(index)}} */ className="dropdown-item" href="#">
+                                            <Link to={`/people/${entity.favorite.uid}`} className="dropdown-item" href="#">
                                                 {entity.favorite.name}
                                             </Link>
                                             <button onClick={()=> actions.deleteFavorites(index)}>
