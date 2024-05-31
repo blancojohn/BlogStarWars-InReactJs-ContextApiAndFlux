@@ -47,7 +47,13 @@ const getStore = ({ getStore, getActions, setStore }) => {
                 fetch(`${urlBase}vehicles`)
                     .then(res => res.json())
                     .then(data => {
-                        setStore({ vehicles: data.results })
+                        let result= data.results.map((entity) => {
+                            return {
+                                ...entity,
+                                liked: false
+                            }
+                        })
+                        setStore({ vehicles: result })
                     })
                     .catch(err => console.error(err))
                 fetch(`${urlBase}planets`)
@@ -81,18 +87,31 @@ const getStore = ({ getStore, getActions, setStore }) => {
                 fetch(`${urlBase}vehicles/${uid}`)
                     .then(res => res.json())
                     .then(data => {
-                        console.log('VEHICLE SELECT', data.result)
+
+                        console.log('VEHICLE',data.result.properties)
                         setStore({ detailsVehicle: data.result.properties })
                     })
-                    .catch(err => console.error(err))
+                    .catch(err => console.log(err))
+            },
+
+            getDetailsPlanet: (uid) => {
+                const { urlBase }= getStore()
+                fetch(`${urlBase}planets/${uid}`)
+                    .then(res => res.json())
+                    .then(data => {
+                        setStore({ detailsPlanet: data.result.properties })
+                    })
+                    .catch(err => console.log(err))
             },
             /* Esta función además de agregar al array favorites por medio del setStore una entidad, también setea 
             la propiedad liked creada al momento de almacenar la respuesta de la API de cada entidad. El botón cambia
             de estado accediendo primero a la propiedad liked de cada entidad previamente seleccionada por index dentro
             del array de characters */
             addFavorites: (index) => {
+                /* Necesito la propiedad del store favorites para luego hacer el spread operator
+                   cada vez que se agrega una entidad favorita */
                 const { characters, favorites } = getStore()
-                let favorite = characters[index]
+                var favorite= characters[index]
                 characters[index].liked = !characters[index].liked
                 setStore({
                     favorites: [...favorites, {
@@ -100,6 +119,18 @@ const getStore = ({ getStore, getActions, setStore }) => {
                     }],
                     characters /* Es la propiedad del store que contiene el array de objetos que será seteada 
                     la propiedad liked de ese obejeto a true para cambiar de estado en caso de seleccionarse */
+                })
+            },
+
+            addFavoritePlanet: (index) => {
+                const { planets, favorites }= getStore()
+                var favorite= planets[index]
+                planets[index].liked= !planets[index].liked
+                setStore({
+                    favorites: [...favorites, {
+                        favorite
+                    }],
+                    planets
                 })
             },
 

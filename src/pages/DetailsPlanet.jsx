@@ -2,13 +2,14 @@ import React, { useContext, useEffect } from "react";
 import { Context } from "../store/AppContext";
 import { useParams } from "react-router-dom";
 
-const DetailsVehicle = () => {
+
+const DetailsPlanet = () => {
     const { store, actions } = useContext(Context)
-    const { name, model, length, manufacturer, passengers, created, cost_in_credits } = store.detailsVehicle
+    const { name, climate, created, diameter, edited, gravity, terrain } = store.detailsPlanet
     const params = useParams()
 
     useEffect(() => {
-        actions.getDetailsVehicle(params.uid)
+        actions.getDetailsPlanet(params.uid)
     }, [params.uid])
 
     return (
@@ -24,12 +25,12 @@ const DetailsVehicle = () => {
                             <p className="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
                         </div>
                         <ul className="list-group list-group-flush">
-                            <li className="list-group-item">Model: {model}</li>
-                            <li className="list-group-item">Length: {length}</li>
-                            <li className="list-group-item">Manufacturer: {manufacturer}</li>
-                            <li className="list-group-item">Passengers: {passengers}</li>
+                            <li className="list-group-item">Climate: {climate}</li>
                             <li className="list-group-item">Created: {created}</li>
-                            <li className="list-group-item">Cost in credits: {cost_in_credits}</li>
+                            <li className="list-group-item">Diameter: {diameter}</li>
+                            <li className="list-group-item">Edited: {edited}</li>
+                            <li className="list-group-item">Gravity: {gravity}</li>
+                            <li className="list-group-item">Terrain: {terrain}</li>
                         </ul>
                     </div>
                 </div>
@@ -38,4 +39,4 @@ const DetailsVehicle = () => {
     )
 }
 
-export default DetailsVehicle
+export default DetailsPlanet

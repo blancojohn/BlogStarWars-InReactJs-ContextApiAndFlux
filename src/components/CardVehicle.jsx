@@ -22,7 +22,7 @@ const CardVehicle = () => {
                                             <h6 className="card-title">{vehicle.name}</h6>
                                         </div>
                                         <div className="card-body">
-                                            <Link to={`/${vehicle.name}/${vehicle.uid}`} /* onClick={()=>actions.selectEntity(index)} */ type="button" className="btn btn-primary">Learn More</Link>
+                                            <Link to={`/vehicle/${vehicle.uid}`} /* onClick={()=>actions.selectEntity(index)} */ type="button" className="btn btn-primary">Learn More</Link>
                                             <button onClick={() => actions.addFavorites(index)} /* className={`likeBtn ${people.liked ? "liked" : ""}`} */  /* className="active" data-bs-toggle="button" aria-pressed="true" */>
                                                 <HeartIcon />
                                             </button>

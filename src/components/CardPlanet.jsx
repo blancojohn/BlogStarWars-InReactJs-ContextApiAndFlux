@@ -22,8 +22,10 @@ const CardPlanet = () => {
                                             <h6 className="card-title">{planet.name}</h6>
                                         </div>
                                         <div className="card-body">
-                                            <a href="#" className="card-link">Card link</a>
-                                            <a href="#" className="card-link">Another link</a>
+                                            <Link to={`/planet/${planet.uid}`} /* onClick={()=>actions.selectEntity(index)} */ type="button" className="btn btn-primary">Learn More</Link>
+                                            <button onClick={() => actions.addFavoritePlanet(index)} className={`likeBtn ${planet.liked ? "liked" : ""}`}>
+                                                <HeartIcon />
+                                            </button>
                                         </div>
                                     </div>
                                 </div>
