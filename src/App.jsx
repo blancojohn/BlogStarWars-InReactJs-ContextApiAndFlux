@@ -15,9 +15,9 @@ const App = () => {
         <Navbar />
         <Routes>
           <Route path='/' element={<Home />} />
-          <Route path='/people/:uid' element={<DetailsPeople />} />
-          <Route path='/vehicle/:uid' element={<DetailsVehicle />} />
-          <Route path='/planet/:uid' element={<DetailsPlanet />} /> 
+          <Route path='/characters/:uid' element={<DetailsPeople />} />
+          <Route path='/vehicles/:uid' element={<DetailsVehicle />} />
+          <Route path='/planets/:uid' element={<DetailsPlanet />} /> 
         </Routes>
       </BrowserRouter>
     </>

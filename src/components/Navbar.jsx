@@ -18,19 +18,20 @@ const Navbar = () => {
                             Favorites {store.favorites.length}
                         </button>
                         <ul className="dropdown-menu">
-                            {
-                                store.favorites.map((entity, index) => {
-                                    return (
-                                        <li key={entity.favorite.uid} className="d-flex">
-                                            <Link to={`/people/${entity.favorite.uid}`} className="dropdown-item" href="#">
-                                                {entity.favorite.name}
-                                            </Link>
-                                            <button onClick={()=> actions.deleteFavorites(index)}>
-                                                <GiTrashCan />
-                                            </button>
-                                        </li>
-                                    )
-                                })
+                            {   
+                                store.favorites.length > 0 ?
+                                    store.favorites.map((entity, index) => {
+                                        return (
+                                            <li key={entity.favorite.uid} className="d-flex">
+                                                <Link to={`/${entity.entity}/${entity.favorite.uid}`} className="dropdown-item" href="#">
+                                                    {entity.favorite.name}
+                                                </Link> 
+                                                <button onClick={()=> actions.deleteFavorites(index)}>
+                                                    <GiTrashCan />
+                                                </button>
+                                            </li>
+                                        )
+                                    }) : (<h6 className="text-center">Sin favoritos</h6>)
                             }
                         </ul>
                     </div>

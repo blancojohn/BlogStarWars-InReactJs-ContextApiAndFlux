@@ -109,10 +109,10 @@ const getStore = ({ getStore, getActions, setStore }) => {
                 getEntity[index].liked = !getEntity[index].liked
                 setStore({
                     favorites: [...favorites, {
-                        favorite
+                        favorite,
+                        entity
                     }],
-                    [entity]: getEntity /* Es la propiedad del store que contiene el array de objetos que será seteada 
-                    la propiedad liked de ese obejeto a true para cambiar de estado en caso de seleccionarse */
+                    [entity]: getEntity
                 })
             },
 
